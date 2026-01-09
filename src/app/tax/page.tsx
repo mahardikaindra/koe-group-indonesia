@@ -36,18 +36,18 @@ import {
   Mail,
   AlertCircle,
 } from "lucide-react";
-import { useFirebase } from "./components/FirebaseProvider";
-import Button from "./components/Button";
-import Card from "./components/Card";
-import EditorToolbar from "./components/EditorToolbar";
-import BlogCard from "./components/BlogCard";
+import { useFirebase } from "../../components/FirebaseProvider";
+import Button from "../../components/Button";
+import Card from "../../components/Card";
+import EditorToolbar from "../../components/EditorToolbar";
+import BlogCard from "../../components/BlogCard";
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import EmptyState from "./components/EmptyState";
+import EmptyState from "../../components/EmptyState";
 
 function TaxBlogApp() {
   const { db, auth } = useFirebase();
@@ -283,8 +283,9 @@ function TaxBlogApp() {
             <div className="flex flex-col items-center text-center mb-8">
               <div className="bg-[#064e3b] p-4 rounded-2xl text-white mb-6 shadow-xl shadow-emerald-900/20">
                 <Image
-                  src="/logo-koe-white.png"
-                  alt="Koe Group Indonesia"
+                  src="/images/logo-white.png"
+                  alt="Koe Legali Indonesia"
+                  title="Koe Legali Indonesia"
                   width={60}
                   height={60}
                 />
@@ -380,7 +381,7 @@ function TaxBlogApp() {
               <ShieldCheck size={20} />
             </div>
             <h1 className="text-lg font-bold text-[#064e3b] font-digitale uppercase tracking-wider">
-              Koe Group Indonesia
+              Koe Legali Indonesia
             </h1>
           </div>
           <Button
