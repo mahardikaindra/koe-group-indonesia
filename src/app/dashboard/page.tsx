@@ -261,6 +261,8 @@ const BlogCard = ({ blog, userId, onLike, onEdit, onView, onDelete }: any) => {
         year: "numeric",
       })
     : "Baru saja";
+  const summedContent = blog.content  ? blog.content.replace(/<[^>]*>/g, "").substring(0, 150) + "..."
+  : "Tidak ada ringkasan";
 
   return (
     <motion.div
@@ -318,7 +320,7 @@ const BlogCard = ({ blog, userId, onLike, onEdit, onView, onDelete }: any) => {
           </h3>
           <div
             className="text-slate-500 text-sm line-clamp-2 mb-6 flex-1 rich-content"
-            dangerouslySetInnerHTML={{ __html: blog.content }}
+            dangerouslySetInnerHTML={{ __html: summedContent }}
           />
 
           <div className="flex items-center justify-between pt-4 border-t border-slate-50">
@@ -377,6 +379,7 @@ export default function DashboardPage() {
     metaDescription: "",
     backlinkUrl: "",
     backlinkText: "",
+    isFeatured: false,
   });
 
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -447,6 +450,7 @@ export default function DashboardPage() {
       metaDescription: blog.metaDescription || "",
       backlinkUrl: blog.backlinkUrl || "",
       backlinkText: blog.backlinkText || "",
+      isFeatured: blog.isFeatured || false,
     });
     setEditingId(blog.id);
     setView("add");
@@ -462,6 +466,7 @@ export default function DashboardPage() {
       metaDescription: blog.metaDescription || "",
       backlinkUrl: blog.backlinkUrl || "",
       backlinkText: blog.backlinkText || "",
+      isFeatured: blog.isFeatured || false,
     });
     setPreviewMode(true);
   };
@@ -629,6 +634,7 @@ export default function DashboardPage() {
         metaDescription: "",
         backlinkUrl: "",
         backlinkText: "",
+        isFeatured: false,
       });
       if (editorRef.current) editorRef.current.innerHTML = "";
       setEditingId(null);
@@ -757,6 +763,7 @@ export default function DashboardPage() {
                       metaDescription: "",
                       backlinkUrl: "",
                       backlinkText: "",
+                      isFeatured: false,
                     });
                     setView("add");
                   }}
@@ -908,7 +915,7 @@ export default function DashboardPage() {
                         />
                       </div>
 
-                      <div className="space-y-6 pt-8 border-t border-slate-50 bg-slate-50/30 -mx-8 px-8 py-8 rounded-b-3xl">
+                      <div className="space-y-6 pt-8 border-t border-slate-50 bg-slate-50/30 -mx-8 px-8 py-1 rounded-b-3xl">
                         <div className="flex items-center justify-between">
                           <h4 className="text-xs font-black text-indigo-600 uppercase tracking-widest flex items-center gap-2">
                             <Sparkles size={16} /> AI SEO Assistant
@@ -974,6 +981,52 @@ export default function DashboardPage() {
                           />
                         </div>
                       </div>
+
+                      {/* Add radio buttons for publish status is featured ? */}
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+                          Status Publikasi
+                        </label>
+                        <div className="flex items-center gap-4">
+                          <label className="flex items-center cursor-pointer">
+                            <input
+                              type="radio"
+                              name="isFeatured"
+                              value="true"
+                              checked={formData.isFeatured === true}
+                              onChange={() =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  isFeatured: true,
+                                }))
+                              }
+                              className="form-radio h-4 w-4 text-emerald-600 transition duration-150 ease-in-out"
+                            />
+                            <span className="ml-2 text-sm text-slate-700 font-medium">
+                              Tampilkan di Halaman Utama
+                            </span>
+                          </label>
+                          <label className="flex items-center cursor-pointer">
+                            <input
+                              type="radio"
+                              name="isFeatured"
+                              value="false"
+                              checked={formData.isFeatured === false}
+                              onChange={() =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  isFeatured: false,
+                                }))
+                              }
+                              className="form-radio h-4 w-4 text-slate-400 transition duration-150 ease-in-out"
+                            />
+                            <span className="ml-2 text-sm text-slate-700 font-medium">
+                              Hanya Publikasi Biasa
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+
 
                       <Button
                         type="submit"
