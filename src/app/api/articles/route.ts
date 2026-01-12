@@ -10,7 +10,11 @@ export async function GET() {
       id: doc.id,
       ...doc.data(),
     }));
-    return NextResponse.json(articlesList);
+    return NextResponse.json(articlesList, { status: 200, headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    }  });
   } catch (error) {
     console.error("Error fetching articles:", error);
     return NextResponse.json(
