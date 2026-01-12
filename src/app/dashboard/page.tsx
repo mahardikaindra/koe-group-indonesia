@@ -5,7 +5,6 @@ import Image from "next/image";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ShieldCheck,
   LogOut,
   PlusCircle,
   ArrowLeft,
@@ -36,17 +35,12 @@ import {
   Edit3,
 } from "lucide-react";
 
-import { initializeApp } from "firebase/app";
 import {
-  getAuth,
   onAuthStateChanged,
   signOut,
-  signInWithCustomToken,
-  signInAnonymously,
   User,
 } from "firebase/auth";
 import {
-  getFirestore,
   collection,
   addDoc,
   serverTimestamp,
@@ -559,7 +553,7 @@ export default function DashboardPage() {
       setBlogs(blogList);
     });
     return () => unsubscribe();
-  }, [appId, db, user]);
+  }, [db, user]);
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -609,16 +603,17 @@ export default function DashboardPage() {
           : serverTimestamp(),
         updatedAt: serverTimestamp(),
         seoScore: seoAnalysis.score,
+        isFeatured: formData.isFeatured || false,
       };
 
       if (editingId) {
         await updateDoc(
-          doc(db, "artifacts", appId, "public", "data", "articles", editingId),
+          doc(db, "articles", editingId),
           blogData,
         );
       } else {
         await addDoc(
-          collection(db, "artifacts", appId, "public", "data", "articles"),
+          collection(db, "articles"),
           {
             ...blogData,
             likes: [],
@@ -651,12 +646,7 @@ export default function DashboardPage() {
     if (!user) return;
     const isLiked = currentLikes.includes(user.uid);
     const blogRef = doc(
-      db,
-      "artifacts",
-      appId,
-      "public",
-      "data",
-      "articles",
+      db, "articles",
       blogId,
     );
     try {
