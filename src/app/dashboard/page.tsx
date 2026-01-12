@@ -261,8 +261,9 @@ const BlogCard = ({ blog, userId, onLike, onEdit, onView, onDelete }: any) => {
         year: "numeric",
       })
     : "Baru saja";
-  const summedContent = blog.content  ? blog.content.replace(/<[^>]*>/g, "").substring(0, 150) + "..."
-  : "Tidak ada ringkasan";
+  const summedContent = blog.content
+    ? blog.content.replace(/<[^>]*>/g, "").substring(0, 150) + "..."
+    : "Tidak ada ringkasan";
 
   return (
     <motion.div
@@ -480,7 +481,7 @@ export default function DashboardPage() {
       return;
     try {
       await deleteDoc(
-        doc(db, "artifacts", appId, "public", "data", "blogs", blogId),
+        doc(db, "artifacts", appId, "public", "data", "articles", blogId),
       );
     } catch (err) {
       console.error("Delete error:", err);
@@ -547,7 +548,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!user) return;
-    const blogsQuery = query(collection(db, "blogs"));
+    const blogsQuery = query(collection(db, "articles"));
     const unsubscribe = onSnapshot(blogsQuery, (snapshot) => {
       const blogList = snapshot.docs
         .map((doc) => ({ id: doc.id, ...doc.data() }))
@@ -612,12 +613,12 @@ export default function DashboardPage() {
 
       if (editingId) {
         await updateDoc(
-          doc(db, "artifacts", appId, "public", "data", "blogs", editingId),
+          doc(db, "artifacts", appId, "public", "data", "articles", editingId),
           blogData,
         );
       } else {
         await addDoc(
-          collection(db, "artifacts", appId, "public", "data", "blogs"),
+          collection(db, "artifacts", appId, "public", "data", "articles"),
           {
             ...blogData,
             likes: [],
@@ -655,7 +656,7 @@ export default function DashboardPage() {
       appId,
       "public",
       "data",
-      "blogs",
+      "articles",
       blogId,
     );
     try {
@@ -1026,7 +1027,6 @@ export default function DashboardPage() {
                           </label>
                         </div>
                       </div>
-
 
                       <Button
                         type="submit"
