@@ -9,7 +9,7 @@ export default function middleware(request: NextRequest) {
   const origin = request.headers.get('origin');
   
   // Define allowed origins dynamically
-  const allowedOrigins = process.env.NODE_ENV === 'production' 
+  const allowedOrigins = process.env.NEXT_PUBLIC_NODE_ENV === 'production' 
     ? ['https://www.koegroupindonesia.id']
     : ['http://localhost:3000', 'http://localhost:3001'];
   
