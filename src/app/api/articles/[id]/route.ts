@@ -4,11 +4,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } }
 ) {
   try {
-    const { id } = params;
-    const articleRef = doc(db, "articles", id);
+    const { slug } = params;
+    const articleRef = doc(db, "articles", slug);
     const articleSnap = await getDoc(articleRef);
 
     if (!articleSnap.exists()) {
