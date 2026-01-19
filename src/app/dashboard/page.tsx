@@ -35,11 +35,7 @@ import {
   Edit3,
 } from "lucide-react";
 
-import {
-  onAuthStateChanged,
-  signOut,
-  User,
-} from "firebase/auth";
+import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import {
   collection,
   addDoc,
@@ -607,18 +603,12 @@ export default function DashboardPage() {
       };
 
       if (editingId) {
-        await updateDoc(
-          doc(db, "articles", editingId),
-          blogData,
-        );
+        await updateDoc(doc(db, "articles", editingId), blogData);
       } else {
-        await addDoc(
-          collection(db, "articles"),
-          {
-            ...blogData,
-            likes: [],
-          },
-        );
+        await addDoc(collection(db, "articles"), {
+          ...blogData,
+          likes: [],
+        });
       }
 
       setFormData({
@@ -645,10 +635,7 @@ export default function DashboardPage() {
   const handleLike = async (blogId: string, currentLikes: string[] = []) => {
     if (!user) return;
     const isLiked = currentLikes.includes(user.uid);
-    const blogRef = doc(
-      db, "articles",
-      blogId,
-    );
+    const blogRef = doc(db, "articles", blogId);
     try {
       await updateDoc(blogRef, {
         likes: isLiked ? arrayRemove(user.uid) : arrayUnion(user.uid),
@@ -665,6 +652,19 @@ export default function DashboardPage() {
       </div>
     );
 
+  if (!user) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-6">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">
+          Akses Ditolak
+        </h2>
+        <p className="text-slate-600 mb-8 text-center">
+          Anda harus masuk untuk mengakses dashboard manajemen konten.
+        </p>
+        <Button onClick={() => (window.location.href = "/login")}>Login</Button>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-[#f8fafc] text-slate-800 font-sans selection:bg-emerald-100">
       <style>{`
