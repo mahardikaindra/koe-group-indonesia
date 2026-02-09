@@ -5,10 +5,10 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(
   // Change `request: Request` to `request: NextRequest`
   request: NextRequest,
-  { params }: { params: { id: string } }, // Keep params as is
+  { params }: { params: Promise<{ id: string }> }, // Keep params as is
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const articleRef = doc(db, "articles", id);
     const articleSnap = await getDoc(articleRef);
 
@@ -36,11 +36,11 @@ export async function GET(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   // Implementation for DELETE method can be added here
   try {
-    const { id } = params;
+    const { id } = await params;
     const articleRef = doc(db, "articles", id);
     await deleteDoc(articleRef);
 
@@ -59,11 +59,11 @@ export async function DELETE(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   // Implementation for PUT method can be added here
   try {
-    const { id } = params;
+    const { id } = await params;
     const body = await request.json();
     const articleRef = doc(db, "articles", id);
     await setDoc(articleRef, body, { merge: true });
@@ -83,11 +83,11 @@ export async function PUT(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   // Implementation for POST method can be added here
   try {
-    const { id } = params;
+    const { id } = await params;
     const body = await request.json();
     const articleRef = doc(db, "articles", id);
     await setDoc(articleRef, body);
