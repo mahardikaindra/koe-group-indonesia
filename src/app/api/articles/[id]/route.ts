@@ -1,5 +1,5 @@
 import { db } from "../../../../lib/firebase";
-import { doc, getDoc, deleteDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, deleteDoc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -8,16 +8,18 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }, // Keep params as is
 ) {
   try {
-    const { id } = await params;
-    const articleRef = doc(db, "articles", id);
-    const articleSnap = await getDoc(articleRef);
+    const { id: slug } = await params;
+    const q = query(collection(db, "articles"), where("slug", "==", slug));
+    const querySnapshot = await getDocs(q);
 
-    if (!articleSnap.exists()) {
+    if (querySnapshot.empty) {
       return NextResponse.json(
         { success: false, message: "Article not found" },
         { status: 404 },
       );
     }
+
+    const articleSnap = querySnapshot.docs[0];
 
     return NextResponse.json(
       { success: true, data: { id: articleSnap.id, ...articleSnap.data() } },
