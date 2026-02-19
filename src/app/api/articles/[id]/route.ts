@@ -1,5 +1,13 @@
 import { db } from "../../../../lib/firebase";
-import { doc, getDoc, deleteDoc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
+import {
+  doc,
+  deleteDoc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(

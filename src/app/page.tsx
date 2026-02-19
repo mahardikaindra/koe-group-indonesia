@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   Calculator,
   FileText,
@@ -19,6 +20,7 @@ import {
   Globe,
   ArrowUpRight,
 } from "lucide-react";
+import { handlePesanWA } from "@/src/lib/utils";
 
 // --- Navbar Component ---
 const Navbar = () => {
@@ -46,9 +48,13 @@ const Navbar = () => {
           }`}
         >
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#2c4f40] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">K</span>
-            </div>
+            <Image
+              src="/images/icon.png"
+              alt="Koe Legali Logo"
+              width={50}
+              height={50}
+              className="object-contain"
+            />
             <div className="flex flex-col">
               <span className="font-extrabold text-[#2c4f40] text-sm leading-none tracking-tight">
                 KOE LEGALI
@@ -151,43 +157,26 @@ const Hero = () => (
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button className="bg-[#2c4f40] text-white px-10 py-5 rounded-full font-bold text-lg flex items-center justify-center gap-3 hover:shadow-2xl hover:shadow-[#2c4f40]/30 transition-all active:scale-95">
+            <button
+              className="bg-[#2c4f40] text-white px-10 py-5 rounded-full font-bold text-lg flex items-center justify-center gap-3 hover:shadow-2xl hover:shadow-[#2c4f40]/30 transition-all active:scale-95"
+              onClick={() => handlePesanWA("Konsultasi Ahli")}
+            >
               Konsultasi Ahli <ArrowRight size={20} />
             </button>
-            <div className="flex items-center gap-4 px-6">
-              <div className="flex -space-x-3">
-                {[1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className={`w-10 h-10 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-[8px] font-bold text-gray-400 overflow-hidden uppercase`}
-                  >
-                    <img
-                      src={`https://i.pravatar.cc/100?img=${i + 10}`}
-                      alt="User"
-                    />
-                  </div>
-                ))}
-              </div>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest leading-none">
-                <span className="text-[#2c4f40] block text-sm">
-                  500+ Bisnis
-                </span>{" "}
-                Terdaftar
-              </p>
-            </div>
           </div>
         </div>
 
         {/* Hero Image Section */}
         <div className="lg:w-5/12 relative self-end h-full">
           <div className="relative z-10 w-full h-full flex items-end">
-            <div className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-[700px] overflow-visible">
+            <div className="relative w-full aspect-4/5 lg:aspect-auto lg:h-175 overflow-visible">
               <div className="absolute bottom-0 right-0 w-[120%] h-[80%] bg-[#2c4f40]/5 rounded-[4rem] -rotate-6 transform translate-x-10 translate-y-10"></div>
 
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1000"
                 alt="Profesional Perempuan Indonesia"
-                className="relative z-10 w-full h-full object-contain object-bottom drop-shadow-[0_20px_50px_rgba(44,79,64,0.3)] grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                fill
+                className="z-10 object-contain object-bottom drop-shadow-[0_20px_50px_rgba(44,79,64,0.3)] grayscale-[20%] hover:grayscale-0 transition-all duration-700"
               />
 
               {/* Floating Stats Card */}
@@ -288,10 +277,10 @@ const Services = () => (
             Layanan Tanpa Batas.
           </h2>
         </div>
-        <p className="text-gray-500 text-lg max-w-sm">
+        {/* <p className="text-gray-500 text-lg max-w-sm">
           Didesain untuk fleksibilitas bisnis modern, dari startup hingga
           korporasi besar.
-        </p>
+        </p> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -304,7 +293,12 @@ const Services = () => (
         >
           <div className="relative z-10">
             <div className="w-16 h-16 bg-[#2c4f40]/5 rounded-2xl flex items-center justify-center text-[#2c4f40] mb-10 group-hover:scale-110 transition-transform duration-500">
-              <Calculator size={32} strokeWidth={1.5} />
+              <Image
+                src="/images/koe-logo.png"
+                width={32}
+                height={32}
+                alt="Koe Logo"
+              />
             </div>
             <h3 className="text-3xl font-black text-[#2c4f40] mb-4">
               PajakKoe
@@ -324,11 +318,17 @@ const Services = () => (
           href="https://www.nibkoe.co.id"
           target="_blank"
           rel="noreferrer"
-          className="group relative bg-[#2c4f40] p-10 lg:p-16 rounded-[4rem] hover:shadow-2xl hover:shadow-[#2c4f40]/30 transition-all duration-500 overflow-hidden text-white"
+          className="group relative bg-[#9b1f15] p-10 lg:p-16 rounded-[4rem] hover:shadow-2xl hover:shadow-[#2c4f40]/30 transition-all duration-500 overflow-hidden text-white"
         >
           <div className="relative z-10">
             <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-10 group-hover:rotate-12 transition-transform duration-500">
-              <FileText size={32} strokeWidth={1.5} />
+              <Image
+                src="/images/nib-logo.png"
+                width={32}
+                height={32}
+                alt="NIBKoe Logo"
+                className="object-contain"
+              />
             </div>
             <h3 className="text-3xl font-black mb-4">NIBKoe</h3>
             <p className="text-white/60 text-lg mb-10 max-w-xs">
@@ -352,7 +352,7 @@ const Services = () => (
               <ShieldCheck size={28} />
             </div>
             <h3 className="text-2xl font-bold text-[#2c4f40] mb-4">HalalKoe</h3>
-            <p className="text-gray-400 mb-8 flex-grow text-sm">
+            <p className="text-gray-400 mb-8 grow text-sm">
               Sertifikasi halal untuk jangkauan pasar yang lebih luas.
             </p>
             <div className="font-bold text-[10px] text-gray-300 group-hover:text-[#2c4f40] transition-colors uppercase tracking-widest">
@@ -373,7 +373,7 @@ const Services = () => (
               <Briefcase size={28} />
             </div>
             <h3 className="text-2xl font-bold text-[#2c4f40] mb-4">UsahaKoe</h3>
-            <p className="text-gray-400 mb-8 flex-grow text-sm">
+            <p className="text-gray-400 mb-8 grow text-sm">
               Pendirian badan usaha (PT/CV) dengan akta resmi.
             </p>
             <div className="font-bold text-[10px] text-gray-300 group-hover:text-[#2c4f40] transition-colors uppercase tracking-widest">
@@ -427,7 +427,7 @@ const Media = () => (
           },
         ].map((news, i) => (
           <div key={i} className="group cursor-pointer">
-            <div className="aspect-[16/9] bg-gray-100 rounded-[2.5rem] mb-8 overflow-hidden relative">
+            <div className="aspect-video bg-gray-100 rounded-[2.5rem] mb-8 overflow-hidden relative">
               <div className="absolute inset-0 bg-[#2c4f40]/5 group-hover:bg-[#2c4f40]/20 transition-all"></div>
               <div className="absolute top-6 left-6">
                 <span className="bg-white text-[#2c4f40] px-3 py-1 rounded-full text-[10px] font-black uppercase shadow-sm">
@@ -580,7 +580,7 @@ const Footer = () => (
                 <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">
                   WhatsApp
                 </p>
-                <p className="font-bold text-lg">0857-9794-6263</p>
+                <p className="font-bold text-lg">0822-4007-2717</p>
               </div>
             </div>
             <div className="flex gap-6 items-start group cursor-pointer">
@@ -665,7 +665,7 @@ export default function App() {
       <Clients />
       <Stats />
       <Services />
-      <Media />
+      {/* <Media /> */}
       <Trust />
       <Footer />
     </div>
