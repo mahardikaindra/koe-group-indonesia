@@ -364,6 +364,7 @@ export default function DashboardPage() {
   const [formData, setFormData] = useState({
     title: "",
     category: "npwp",
+    website: "koe",
     imageUrl: "",
     content: "",
     focusKeyword: "",
@@ -435,6 +436,7 @@ export default function DashboardPage() {
     setFormData({
       title: blog.title,
       category: blog.category,
+      website: blog.website || "koe",
       imageUrl: blog.imageUrl,
       content: blog.content,
       focusKeyword: blog.focusKeyword || "",
@@ -451,6 +453,7 @@ export default function DashboardPage() {
     setFormData({
       title: blog.title,
       category: blog.category,
+      website: blog.website || "koe",
       imageUrl: blog.imageUrl,
       content: blog.content,
       focusKeyword: blog.focusKeyword || "",
@@ -615,6 +618,7 @@ export default function DashboardPage() {
         title: "",
         content: "",
         category: "npwp",
+        website: "koe",
         imageUrl: "",
         focusKeyword: "",
         metaDescription: "",
@@ -749,6 +753,7 @@ export default function DashboardPage() {
                       title: "",
                       content: "",
                       category: "npwp",
+                      website: "koe",
                       imageUrl: "",
                       focusKeyword: "",
                       metaDescription: "",
@@ -856,7 +861,7 @@ export default function DashboardPage() {
                           </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                           <div className="md:col-span-2 space-y-1">
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
                               Judul Artikel
@@ -883,6 +888,21 @@ export default function DashboardPage() {
                               <option value="npwp">NPWP</option>
                               <option value="nib">NIB</option>
                               <option value="halal">Halal</option>
+                            </select>
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+                              Website
+                            </label>
+                            <select
+                              name="website"
+                              value={formData.website}
+                              onChange={handleInputChange}
+                              className="w-full px-5 py-3.5 rounded-2xl border border-slate-200 bg-white focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all font-bold"
+                            >
+                              <option value="koe">Koe</option>
+                              <option value="pajakkoe">Pajakkoe</option>
+                              <option value="nib">NIB</option>
                             </select>
                           </div>
                         </div>
