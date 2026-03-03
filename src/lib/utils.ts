@@ -1,6 +1,6 @@
 // src/lib/utils.ts
 
-const WA_PHONE_NUMBER = "6282240072717";
+const WA_PHONE_NUMBER = "6285624346312";
 
 // format currency
 const formatCurrency = (amount: number, currency: string = "USD"): string => {
