@@ -65,7 +65,7 @@ const Footer = () => (
                 <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">
                   WhatsApp
                 </p>
-                <p className="font-bold text-lg">0822-4007-2717</p>
+                <p className="font-bold text-lg">0856-2434-6312</p>
               </div>
             </div>
             <div className="flex gap-6 items-start group cursor-pointer">
