@@ -1,24 +1,17 @@
 "use client";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
-  Calculator,
-  FileText,
   ShieldCheck,
   Briefcase,
   ArrowRight,
   ExternalLink,
-  Phone,
-  Mail,
-  MapPin,
-  ChevronRight,
   Handshake,
-  Menu,
-  X,
   CheckCircle2,
   Award,
   Globe,
   ArrowUpRight,
+  Wrench,
+  Clock,
 } from "lucide-react";
 import { handlePesanWA } from "@/src/lib/utils";
 
@@ -434,14 +427,39 @@ export default function App() {
         }}
       />
 
-      <Navbar />
-      <Hero />
-      <Clients />
-      <Stats />
-      <Services />
-      {/* <Media /> */}
-      <Trust />
-      <Footer />
+      {/* Maintenance Content */}
+      <div className="flex flex-col items-center justify-center min-h-screen relative z-10 text-center px-6 max-w-2xl mx-auto">
+        <div className="w-24 h-24 bg-[#2c4f40]/10 rounded-[2rem] flex items-center justify-center mb-8 rotate-12 hover:rotate-0 transition-all duration-500">
+          <Wrench className="text-[#2c4f40] w-12 h-12" />
+        </div>
+        
+        <h1 className="text-4xl lg:text-6xl font-black text-[#2c4f40] mb-6 tracking-tighter leading-tight">
+          Situs Sedang <br />
+          <span className="text-gray-400 italic">Dalam Perbaikan.</span>
+        </h1>
+        
+        <p className="text-lg text-gray-500 mb-10 leading-relaxed">
+          Kami sedang melakukan pemeliharaan sistem untuk meningkatkan kualitas layanan. Silakan kembali beberapa saat lagi.
+        </p>
+        
+        <button 
+          onClick={() => handlePesanWA("Halo, saya ingin bertanya terkait layanan Koe Legali.")}
+          className="inline-flex items-center gap-3 bg-[#2c4f40] px-8 py-4 rounded-full shadow-2xl shadow-[#2c4f40]/20 text-white font-bold hover:scale-105 active:scale-95 transition-all"
+        >
+          <Clock size={20} />
+          <span>Hubungi via WhatsApp</span>
+        </button>
+      </div>
+
+      {/* Original Content (Hidden during maintenance)
+        <Navbar />
+        <Hero />
+        <Clients />
+        <Stats />
+        <Services />
+        <Trust />
+        <Footer />
+      */}
     </div>
   );
 }
