@@ -443,7 +443,7 @@ export default function App() {
         </p>
         
         <button 
-          onClick={() => handlePesanWA("Halo, saya ingin bertanya terkait layanan Koe Legali.")}
+          onClick={() => {}}
           className="inline-flex items-center gap-3 bg-[#2c4f40] px-8 py-4 rounded-full shadow-2xl shadow-[#2c4f40]/20 text-white font-bold hover:scale-105 active:scale-95 transition-all"
         >
           <Clock size={20} />
